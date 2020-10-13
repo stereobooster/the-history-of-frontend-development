@@ -1,91 +1,161 @@
 digraph dd {
   {
-    node [ shape=plaintext,fontsize=25 ];
-    1990 -> 1991 -> 1992 -> 1993 -> 1994 -> 1995 -> 1996 -> 1997 -> 1998 -> 1999 -> 2000 -> 2001 -> 2002 -> 2003 -> 2004 -> 2005 -> 2006 -> 2007 -> 2008 -> 2009 -> 2010 -> 2011 -> 2012 -> 2013 -> 2014 -> 2015 -> 2016 -> 2017 -> 2018 -> 2019 -> 2020
+    # timeline
+    node [shape=plaintext, fontsize=25]
+    edge [arrowhead=none]
+    1974 -> 1981 -> 1990 -> 1991 -> 1992 -> 1993 -> 1994 -> 1995 -> 1996 -> 1997 -> 1998 -> 1999 -> 2000 -> 2001 -> 2002 -> 2003 -> 2004 -> 2005 -> 2006 -> 2007 -> 2008 -> 2009 -> 2010 -> 2011 -> 2012 -> 2013 -> 2014 -> 2015 -> 2016 -> 2017 -> 2018 -> 2019 -> 2020
   }
 
-  node [ fontsize=30, style=filled ];
-  { rank = same ; 1991 ; "HTTP" [ fontsize=40 ] }
-  { rank = same ; 1993 ; "HTML" [ fontsize=40 ] }
-  { rank = same ; 1995 ; "JavaScript" [ fontsize=40 ]; "HTML 2" }
-  { rank = same ; 1996 ; "CSS" [ fontsize=40 ]; "HTTP 1.0" }
-  { rank = same ; 1997 ; "ECMAScript 1"; "HTML 3.2" }
-  { rank = same ; 1998 ; "ECMAScript 2"; "CSS 2"}
-  { rank = same ; 1999 ; "ECMAScript 3"; "XMLHttpRequest"; "HTML 4.01"; "HTTP 1.1" }
-  { rank = same ; 2001 ; "JSON standard"; }
-  { rank = same ; 2003 ; "ECMAScript 4\n(Abandoned)"; }
-  { rank = same ; 2004 ; "Ruby on Rails" }
-  { rank = same ; 2005 ; "Dojo"; "Prototype" }
-  { rank = same ; 2006 ; "jQuery"; "YUI"; "SASS" }
-  { rank = same ; 2007 ; "iPhone"; "Ext JS" }
-  { rank = same ; 2009 ; "Node.js"; "ECMAScript 5"; "CoffeeScript" }
-  { rank = same ; 2010 ; "AngularJS"; "npm"; "iPad"; "Backbone.js"; "RequireJS"; "Ruby bundler" }
-  { rank = same ; 2011 ; "CSS 2.1"; "ECMAScript 5.1"; "AMD"; "Browserify"; "Bootstrap"; "Asset pipeline" }
-  { rank = same ; 2012 ; "CSS 3 mediaqueries"; "Grunt"; "Webpack"; "TypeScript"; "Elm"; "jquery-pjax" }
-  { rank = same ; 2013 ; "gulp"; "fastdom" }
-  { rank = same ; 2014 ; "HTML 5"; "fetch"; "babel"; "Phoenix" }
-  { rank = same ; 2015 ; "ECMAScript 2015"; "React"; "ActionCable"; "HTTP/2"; "pjax" }
-  { rank = same ; 2018 ; "LiveView"; "quicklink" }
+  {
+    # ideas
+    node [shape=rectangle, style=rounded, fontsize=30]
 
-  "HTTP" -> "HTTP 1.0" -> "HTTP 1.1" -> "HTTP/2"
+    "JS is confusing" [fontsize=40, fillcolor=yellow, style=filled]
+    "JS is confusing" -> {
+      node [fillcolor=yellow, style=filled]
+      "There are good and bad parts"
+      "Compile other language to JS"
+      "Compile other language to WA"
+      "Misses standard library"
+      "Misses static checker"
+      "this keyword is confusing"
+      "Mutable built-in data structures"
+      "Prototypal inheritance is confusing"
+      "Lack of modules"
+      "browser APIs are inconcistent"
+      "type coercion is confusing"
+    }
 
-  "HTML" -> "HTML 2"
-  "HTML 2" -> "HTML 3.2"
-  "HTML 3.2" -> "HTML 4.01"
-  "HTML 4.01" -> "HTML 5"
-  "iPhone" -> "HTML 5"
+    "There are good and bad parts" -> {
+      JSLint "JavaScript: The Good Parts"
+    }
 
-  "CSS" -> "CSS 2"
-  "CSS 2" -> "CSS 2.1"
-  "CSS 2.1" -> "CSS 3 mediaqueries"
-  "iPad" -> "CSS 3 mediaqueries"
+    "Compile other language to JS" -> {
+      TypeScript
+      Elm CoffeeScript Dart
+    }
 
-  "YUI" -> "Ext JS"
-  "YUI" -> "YUI 3"
-  "jQuery" -> "YUI 3"
-  "jQuery" -> "AngularJS"
-  "jQuery" -> "Backbone.js"
-  "jQuery" -> "Bootstrap"
+    "browser APIs are inconcistent" -> { jQuery }
+    "Misses standard library" -> { "Underscore.js" "Moment.js" Elm CoffeeScript Dart }
+    "Misses static checker" -> { JSLint TypeScript Elm Dart }
+    
+    "Prototypal inheritance is confusing" -> "ECMAScript 2015" [label="ES6 Class"]
+    "Mutable built-in data structures" -> "ECMAScript 2015"
+    "this keyword is confusing" -> "ECMAScript 2015" [label="Arrow function"]
+    "this keyword is confusing" -> {
+      "React hooks" "Functional JS"
+    }
 
-  "JavaScript" -> "ECMAScript 1"
-  "ECMAScript 1" -> "ECMAScript 2"
-  "ECMAScript 2" -> "ECMAScript 3"
-  "ECMAScript 3" -> "ECMAScript 4\n(Abandoned)"
-  "ECMAScript 3" -> "ECMAScript 5"
-  "ECMAScript 5" -> "ECMAScript 5.1"
-  "ECMAScript 5.1" -> "ECMAScript 2015"
-  "JSON standard" -> "ECMAScript 5" 
+    "Lack of modules" -> { jQuery "CommonJS Modules" } 
+    "CommonJS Modules" -> RequireJS -> Webpack -> "ECMAScript 2015"
+  }
 
-  "JSON standard" -> "Ajax"
-  "XMLHttpRequest" -> "Ajax" -> "fetch" -> "HTML 5"
-  "Node.js" -> "CommonJS"
-  "CommonJS" -> "CommonJS Modules" -> "ECMAScript 2015"
-  "CommonJS" -> "CommonJS Packages" -> "npm"
-  "CommonJS" -> "CommonJS Promise" -> "ECMAScript 2015"
-  "Ajax" -> "jQuery"
-  "jQuery" -> "jQuery.deferred" -> "CommonJS Promise"
-  "jQuery" -> "jQuery.selector" -> "querySelectorAll"
+  {
+    # technologies
+    node [shape=plaintext, fontsize=30, fontcolor="#999999"]
+    edge [color="#aaaaaa", fontsize=30, fontcolor="#999999"]
 
-  "CommonJS Packages" -> "RequireJS" -> "AMD"
-  "RequireJS" -> "Webpack" -> "Parcel"
-  "RequireJS" -> "Browserify"
+    { rank = same ; 1974 ; "SQL" }
+    { rank = same ; 1981 ; "RPC" }
+    { rank = same ; 1991 ; "HTTP" [fontsize=40] }
+    { rank = same ; 1993 ; "HTML" [fontsize=40] }
+    { rank = same ; 1994 ; "HTTP object model" }
+    { rank = same ; 1995 ; "JavaScript" [fontsize=40] "HTML 2"; "Apache" }
+    { rank = same ; 1996 ; "CSS" [fontsize=40] "HTTP 1.0" }
+    { rank = same ; 1997 ; "ECMAScript 1"; "HTML 3.2" }
+    { rank = same ; 1998 ; "ECMAScript 2"; "CSS 2"}
+    { rank = same ; 1999 ; "ECMAScript 3"; "XMLHttpRequest"; "HTML 4.01"; "HTTP 1.1" }
+    { rank = same ; 2001 ; "REST" }
+    { rank = same ; 2001 ; "JSON standard"; "JSMin" }
+    { rank = same ; 2002 ; "JSLint" }
+    { rank = same ; 2003 ; "ECMAScript 4\n(Abandoned)"; }
+    { rank = same ; 2004 ; "Ruby on Rails"; "nginx" }
+    { rank = same ; 2005 ; "Dojo"; "Prototype"; "CouchDB" }
+    { rank = same ; 2006 ; "jQuery"; "YUI"; "SASS" }
+    { rank = same ; 2007 ; "iPhone"; "Ext JS" }
+    { rank = same ; 2008 ; "JavaScript: The Good Parts" }
+    { rank = same ; 2009 ; "Node.js"; "ECMAScript 5"; "CoffeeScript"; "Underscore.js" }
+    { rank = same ; 2010 ; "AngularJS"; "npm"; "iPad"; "Backbone.js"; "RequireJS"; "Ruby bundler" }
+    { rank = same ; 2011 ; "CSS 2.1"; "ECMAScript 5.1"; "AMD"; "Browserify"; "Bootstrap"; "Asset pipeline"; "JSHint"; "Swagger"; "Dart"; "Moment.js" }
+    { rank = same ; 2012 ; "CSS 3 mediaqueries"; "Grunt"; "Webpack"; "TypeScript"; "Elm"; "jquery-pjax"; "Inventing on Principle" }
+    { rank = same ; 2013 ; "gulp"; "fastdom"; "ESLint"; "PouchDB"; "PostCSS" }
+    { rank = same ; 2014 ; "HTML 5"; "fetch"; "babel"; "Phoenix"; "BEM" }
+    { rank = same ; 2015 ; "ECMAScript 2015"; "React"; "ActionCable"; "HTTP/2"; "pjax" }
+    { rank = same ; 2016 ; "Open API" }
+    { rank = same ; 2017 ; "Prettier" }
+    { rank = same ; 2018 ; "LiveView"; "quicklink"; "GraphQL" }
 
-  "Ruby on Rails" -> "SASS"
-  "Ruby on Rails" -> "CoffeeScript"
-  "Ruby on Rails" -> "Asset pipeline" -> "Grunt" -> "gulp"
-  "Ruby on Rails" -> "Ruby bundler"
-  "Ruby on Rails" -> "ActionCable" -> "Stimulus"
-  "jquery-pjax" -> "ActionCable"
-  "jQuery" -> "jquery-pjax" -> "pjax" -> "quicklink"
-  "Asset pipeline" -> "Webpack"
-  "Webpack" -> "CSS modules"
-  "React" -> "CSS-in-JS"
-  "React" -> "VirtualDOM"
-  "React" -> "Flux"
-  "fastdom" -> "VirtualDOM"
+    "HTTP" -> "HTTP 1.0" -> "HTTP 1.1" -> "HTTP/2"
+    "HTTP" -> "HTTP object model" -> "REST" -> "Swagger" -> "Open API" -> "GraphQL"
+    "JSON standard" -> "Swagger" 
+    "REST" -> "Ruby on Rails"
+    "Apache" -> "nginx"
+    "CouchDB" -> "PouchDB" -> "LiveView"
+    "PouchDB" -> "Logux"
+    "RPC" -> "GraphQL"
+    "SQL" -> "GraphQL"
 
-  "Stimulus" -> "LiveView"
-  "Ruby on Rails" -> "Phoenix" -> "LiveView"
+    "Douglas Crockford" -> "JSLint" [arrowhead=none]
+    "Douglas Crockford" -> "JSON standard" [arrowhead=none]
+    "Douglas Crockford" -> "JSMin" [arrowhead=none]
 
-  "Elm" -> "Flux"
+    "JSLint" -> "JavaScript: The Good Parts"
+    "JSMin" -> "Asset pipeline"
+
+    "HTML" -> "HTML 2" -> "HTML 3.2" -> "HTML 4.01" -> "HTML 5"
+    "iPhone" -> "HTML 5"
+    "iPhone" -> "iPad"
+
+    "CSS" -> "CSS 2" -> "CSS 2.1"
+    "CSS 2.1" -> "CSS 3 mediaqueries"
+    "iPad" -> "CSS 3 mediaqueries"
+    "BEM" -> "CSS modules"
+
+    "YUI" -> "Ext JS"
+    "YUI" -> "YUI 3"
+    "jQuery" -> "YUI 3"
+    "jQuery" -> "AngularJS"
+    "jQuery" -> "Backbone.js"
+    "jQuery" -> "Bootstrap"
+
+    "JavaScript" -> "ECMAScript 1" -> "ECMAScript 2" -> "ECMAScript 3" -> "ECMAScript 5" -> "ECMAScript 5.1" -> "ECMAScript 2015"
+    "ECMAScript 3" -> "ECMAScript 4\n(Abandoned)"
+    "JSON standard" -> "ECMAScript 5" 
+
+    "JSON standard" -> "Ajax"
+    "XMLHttpRequest" -> "Ajax" -> "fetch"
+    "fetch" -> "HTML 5" [arrowhead=none]
+    "Node.js" -> "CommonJS"
+    "CommonJS" -> "CommonJS Modules" -> "ECMAScript 2015"
+    "CommonJS" -> "CommonJS Packages" -> "npm"
+    "CommonJS" -> "CommonJS Promise" -> "ECMAScript 2015"
+    "Ajax" -> "jQuery"
+    "jQuery" -> "CommonJS Promise" [label=deferred]
+    "jQuery" -> "querySelectorAll"
+
+    "CommonJS Modules" -> "RequireJS" -> "AMD"
+    "RequireJS" -> "Webpack" -> "Parcel"
+    "RequireJS" -> "Browserify"
+
+    "Ruby on Rails" -> "SASS" -> "PostCSS"
+    "Ruby on Rails" -> "CoffeeScript"
+    "Ruby on Rails" -> "Asset pipeline" -> "Grunt" -> "gulp"
+    "Ruby on Rails" -> "Ruby bundler"
+    "Ruby on Rails" -> "ActionCable" -> "Stimulus"
+    "jquery-pjax" -> "ActionCable"
+    "jQuery" -> "jquery-pjax" -> "pjax" -> "quicklink"
+    "Asset pipeline" -> "Webpack"
+    "Webpack" -> "CSS modules"
+    "React" -> {
+      "CSS-in-JS" "VirtualDOM" "Flux" "React hooks"
+    }
+    "fastdom" -> "VirtualDOM"
+
+    "Stimulus" -> "LiveView"
+    "Ruby on Rails" -> "Phoenix" -> "LiveView"
+
+    "Inventing on Principle" -> "Elm" -> "Flux"
+
+    "JSLint" -> "JSHint" -> "ESLint"
+  }
 }
